@@ -45,6 +45,16 @@ def add_snippet_page(request):
             return redirect("snippets-list")
 
 
+def snippet_delete(request, snippet_id):
+    snippet = Snippet.objects.get(pk=snippet_id)
+    snippet.delete()
+    return redirect(request.META.get('HTTP_REFERER', '/'))
+
+
+def snippet_edit(request, snippet_id):
+    pass
+
+
 def login(request):
     if request.method == 'POST':
         username = request.POST.get("username")
@@ -60,7 +70,7 @@ def login(request):
 
 def logout(request):
     auth.logout(request)
-    return redirect(request.META.get('HTTP_REFERER', '/'))
+    return redirect('home')
 
 
 def registration(request):
@@ -77,3 +87,12 @@ def registration(request):
             return redirect('home')
         else:
             print("Form is not valid")
+
+
+def snippets_my(request):
+    my_snippets = Snippet.objects.filter(user=request.user)
+    context = {
+        'pagename': 'Мои сниппетов',
+        'snippets': my_snippets
+    }
+    return render(request, 'pages/view_snippets.html', context)
