@@ -2,6 +2,7 @@ from django.http import Http404
 from django.shortcuts import render, redirect
 from MainApp.models import Snippet
 from MainApp.forms import SnippetForm
+from django.contrib import auth
 
 
 def index_page(request):
@@ -38,5 +39,25 @@ def add_snippet_page(request):
     elif request.method == "POST":  # получаем данные формы
         form = SnippetForm(request.POST)
         if form.is_valid():
-            form.save()
+            snippet = form.save(commit=False)
+            snippet.user = request.user
+            snippet.save()
             return redirect("snippets-list")
+
+
+def login(request):
+    if request.method == 'POST':
+        username = request.POST.get("username")
+        password = request.POST.get("password")
+        user = auth.authenticate(request, username=username, password=password)
+        if user is not None:
+            auth.login(request, user)
+        else:
+            # Return error message
+            pass
+    return redirect(request.META.get('HTTP_REFERER', '/'))
+
+
+def logout(request):
+    auth.logout(request)
+    return redirect(request.META.get('HTTP_REFERER', '/'))
