@@ -63,8 +63,10 @@ def login(request):
         if user is not None:
             auth.login(request, user)
         else:
-            # Return error message
-            pass
+            context = {
+                "errors": ["Логин или пароль некорректны"]
+            }
+            return render(request, 'pages/index.html', context)
     return redirect(request.META.get('HTTP_REFERER', '/'))
 
 
@@ -86,7 +88,10 @@ def registration(request):
             form.save()
             return redirect('home')
         else:
-            print("Form is not valid")
+            context = {
+                'form': form
+            }
+            return render(request, 'pages/registration.html', context)
 
 
 def snippets_my(request):
