@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load my_tags %}
 {% block content %}
     <div class="container">
         <div class="row">
@@ -44,7 +45,7 @@
                                 </a>
                             </td>
                             <td>{{ snippet.creation_date }}</td>
-                            <td>{{ snippet.user | default:"Отсутствует" }}</td>
+                            <td>{{ snippet.user | is_empty:"Отсутствует" }}</td>
                         </tr>
                     {% endfor %}
 
