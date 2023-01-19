@@ -1,7 +1,7 @@
 from django.http import Http404
 from django.shortcuts import render, redirect
 from MainApp.models import Snippet
-from MainApp.forms import SnippetForm, UserRegistrationForm
+from MainApp.forms import SnippetForm, UserRegistrationForm, CommentForm
 from django.contrib import auth
 
 
@@ -21,9 +21,11 @@ def snippets_page(request):
 
 def snippet_detail(request, snippet_id):
     snippet = Snippet.objects.get(pk=snippet_id)
+    comment_form = CommentForm()
     context = {
         'pagename': 'Информация о сниппете',
-        'snippet': snippet
+        'snippet': snippet,
+        'comment_form': comment_form
     }
     return render(request, 'pages/snippet_detail.html', context)
 
@@ -101,3 +103,15 @@ def snippets_my(request):
         'snippets': my_snippets
     }
     return render(request, 'pages/view_snippets.html', context)
+
+
+def comment_add(request):
+    if request.method == "POST":
+        comment_form = CommentForm(request.POST)
+        if comment_form.is_valid():
+            snippet_id = request.POST.get("snippet_id")
+            comment = comment_form.save(commit=False)
+            comment.author = request.user
+            comment.snippet = Snippet.objects.get(pk=snippet_id)
+            comment.save()
+            return redirect(request.META.get('HTTP_REFERER', '/'))
