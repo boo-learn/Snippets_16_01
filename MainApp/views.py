@@ -1,5 +1,6 @@
 from django.http import Http404
 from django.shortcuts import render, redirect
+from django.db.models import Q
 from MainApp.models import Snippet
 from MainApp.forms import SnippetForm, UserRegistrationForm, CommentForm
 from django.contrib import auth
@@ -14,10 +15,14 @@ def index_page(request):
 # /snippets/list/?lang=python
 def snippets_page(request):
     # TODO: реализовать "сброс фильтра"
-    snippets = Snippet.objects.all()
+    # print(f"user = {request.user.is_authenticated}")
     context = {
         'pagename': 'Просмотр сниппетов'
     }
+    if not request.user.is_authenticated:
+        snippets = Snippet.objects.filter(private=False)
+    else:
+        snippets = Snippet.objects.filter(Q(private=False) | Q(user=request.user))
     if request.GET.get("lang"):
         snippets = snippets.filter(lang=request.GET['lang'])
         context['lang'] = request.GET['lang']
