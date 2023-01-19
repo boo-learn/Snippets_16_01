@@ -16,7 +16,20 @@
                 <hr>
             </div>
         </div>
+        <div class="row">
+            <div class="col">
+                <form action="" method="get">
+                    <select name="lang" id="">
+                        <option value="js" {% if lang == 'js' %}selected{% endif %}>JavaScript</option>
+                        <option value="python" {% if lang == 'python' %}selected{% endif %}>Python</option>
+                        <option value="cpp" {% if lang == 'cpp' %}selected{% endif %}>C++</option>
+                    </select>
+                    <button type="submit">OK</button>
+                    <a href="...">сброс фильтра</a>
+                </form>
 
+            </div>
+        </div>
         <div class="row">
             <div class="col">
                 <table class="table table-striped">
@@ -25,6 +38,7 @@
                         <th scope="col">ID</th>
                         <th scope="col">Название</th>
                         <th scope="col">Дата создания</th>
+                        <th scope="col">Язык</th>
                         <th scope="col">Пользователь</th>
                     </tr>
                     </thead>
@@ -45,6 +59,7 @@
                                 </a>
                             </td>
                             <td>{{ snippet.creation_date }}</td>
+                            <td>{{ snippet.lang }}</td>
                             <td>{{ snippet.user | is_empty:"Отсутствует" }}</td>
                         </tr>
                     {% endfor %}

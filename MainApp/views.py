@@ -10,12 +10,20 @@ def index_page(request):
     return render(request, 'pages/index.html', context)
 
 
+# /snippets/list
+# /snippets/list/?lang=python
 def snippets_page(request):
+    # TODO: реализовать "сброс фильтра"
     snippets = Snippet.objects.all()
     context = {
-        'pagename': 'Просмотр сниппетов',
-        'snippets': snippets
+        'pagename': 'Просмотр сниппетов'
     }
+    if request.GET.get("lang"):
+        snippets = snippets.filter(lang=request.GET['lang'])
+        context['lang'] = request.GET['lang']
+
+    context['snippets'] =  snippets
+
     return render(request, 'pages/view_snippets.html', context)
 
 
