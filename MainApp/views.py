@@ -15,10 +15,12 @@ def index_page(request):
 # /snippets/list/?lang=python
 def snippets_page(request):
     # TODO: реализовать "сброс фильтра"
+    # TODO: реализовать направление сортировку по алфавиту
     # print(f"user = {request.user.is_authenticated}")
     context = {
         'pagename': 'Просмотр сниппетов'
     }
+    # print(f"sort-data={request.GET.get('sort')}")
     if not request.user.is_authenticated:
         snippets = Snippet.objects.filter(private=False)
     else:
@@ -27,7 +29,10 @@ def snippets_page(request):
         snippets = snippets.filter(lang=request.GET['lang'])
         context['lang'] = request.GET['lang']
 
-    context['snippets'] =  snippets
+    if request.GET.get("sort"):
+        snippets = snippets.order_by(request.GET.get("sort"))
+
+    context['snippets'] = snippets
 
     return render(request, 'pages/view_snippets.html', context)
 
