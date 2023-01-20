@@ -1,0 +1,186 @@
+[
+  {
+    "model": "MainApp.snippet",
+    "pk": 1,
+    "fields": {
+      "name": "Hello world Snippet",
+      "lang": "python",
+      "code": "print(\"Hello world\")",
+      "private": false,
+      "creation_date": "2023-01-18T07:45:05.376Z",
+      "user": null
+    }
+  },
+  {
+    "model": "MainApp.snippet",
+    "pk": 2,
+    "fields": {
+      "name": "Snippet-2",
+      "lang": "python",
+      "code": "example code for snippet-2",
+      "private": false,
+      "creation_date": "2023-01-18T07:45:40.671Z",
+      "user": null
+    }
+  },
+  {
+    "model": "MainApp.snippet",
+    "pk": 5,
+    "fields": {
+      "name": "Snippet-4",
+      "lang": "js",
+      "code": "Test code)",
+      "private": false,
+      "creation_date": "2023-01-18T09:44:23.074Z",
+      "user": null
+    }
+  },
+  {
+    "model": "MainApp.snippet",
+    "pk": 6,
+    "fields": {
+      "name": "Admin's snippet-1",
+      "lang": "js",
+      "code": "Admin's snippet code!",
+      "private": false,
+      "creation_date": "2023-01-18T11:41:32.096Z",
+      "user": 1
+    }
+  },
+  {
+    "model": "MainApp.snippet",
+    "pk": 7,
+    "fields": {
+      "name": "User's snippet-1",
+      "lang": "js",
+      "code": "Code...",
+      "private": false,
+      "creation_date": "2023-01-18T13:30:30.726Z",
+      "user": 2
+    }
+  },
+  {
+    "model": "MainApp.snippet",
+    "pk": 8,
+    "fields": {
+      "name": "Admin snippet-2",
+      "lang": "cpp",
+      "code": "Code...",
+      "private": false,
+      "creation_date": "2023-01-18T13:31:05.090Z",
+      "user": 1
+    }
+  },
+  {
+    "model": "MainApp.snippet",
+    "pk": 9,
+    "fields": {
+      "name": "Big snippet",
+      "lang": "py",
+      "code": "n = 10\r\nn += 4\r\nprint(n)",
+      "private": false,
+      "creation_date": "2023-01-19T10:06:49.377Z",
+      "user": 2
+    }
+  },
+  {
+    "model": "MainApp.snippet",
+    "pk": 10,
+    "fields": {
+      "name": "Private User1's Snippet",
+      "lang": "py",
+      "code": "Secret code!",
+      "private": true,
+      "creation_date": "2023-01-19T12:21:36.195Z",
+      "user": 2
+    }
+  },
+  {
+    "model": "MainApp.snippet",
+    "pk": 11,
+    "fields": {
+      "name": "Admin's private snippet",
+      "lang": "cpp",
+      "code": "Super secret code!!!",
+      "private": true,
+      "creation_date": "2023-01-19T12:22:29.013Z",
+      "user": 1
+    }
+  },
+  {
+    "model": "MainApp.comment",
+    "pk": 1,
+    "fields": {
+      "text": "Тестовый комментарий!",
+      "creation_date": "2023-01-19T08:24:58.959Z",
+      "author": 2,
+      "snippet": 2
+    }
+  },
+  {
+    "model": "MainApp.comment",
+    "pk": 2,
+    "fields": {
+      "text": "Еще один комментарий",
+      "creation_date": "2023-01-19T08:59:09.088Z",
+      "author": 2,
+      "snippet": 2
+    }
+  },
+  {
+    "model": "MainApp.comment",
+    "pk": 3,
+    "fields": {
+      "text": "Комментарий для Snippet-4",
+      "creation_date": "2023-01-19T09:00:06.158Z",
+      "author": 2,
+      "snippet": 5
+    }
+  },
+  {
+    "model": "MainApp.comment",
+    "pk": 4,
+    "fields": {
+      "text": "И еще один...",
+      "creation_date": "2023-01-19T09:12:57.676Z",
+      "author": 2,
+      "snippet": 2
+    }
+  },
+  {
+    "model": "auth.user",
+    "pk": 1,
+    "fields": {
+      "password": "pbkdf2_sha256$390000$tZ0ArSJuezTRNvFygl1njm$tqzfZuO8vN4E7PwSvF5cE3Z+5Z7JV52FMUfiEumUhg0=",
+      "last_login": "2023-01-20T09:04:10.023Z",
+      "is_superuser": true,
+      "username": "admin",
+      "first_name": "",
+      "last_name": "",
+      "email": "admin@mail.ru",
+      "is_staff": true,
+      "is_active": true,
+      "date_joined": "2023-01-18T10:56:22.886Z",
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "auth.user",
+    "pk": 2,
+    "fields": {
+      "password": "pbkdf2_sha256$390000$OthrseXpGnAHexURPodIor$xSsj4fCvdcfA9YlD3wkQb+lut702nb/Ete2aJ1lnnv4=",
+      "last_login": "2023-01-19T12:12:45.670Z",
+      "is_superuser": false,
+      "username": "user1",
+      "first_name": "",
+      "last_name": "",
+      "email": "user1@mail.ru",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2023-01-18T12:18:11.362Z",
+      "groups": [],
+      "user_permissions": []
+    }
+  }
+]

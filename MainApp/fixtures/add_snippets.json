@@ -1,0 +1,13 @@
+[
+  {
+    "model": "MainApp.snippet",
+    "fields": {
+      "name": "Fixture Snippet",
+      "lang": "python",
+      "code": "...",
+      "private": false,
+      "creation_date": "2023-01-18T07:45:05.376Z",
+      "user": 2
+    }
+  }
+]
