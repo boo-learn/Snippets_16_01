@@ -4,6 +4,8 @@ from django.db.models import Q
 from MainApp.models import Snippet
 from MainApp.forms import SnippetForm, UserRegistrationForm, CommentForm
 from django.contrib import auth
+from django.contrib.auth.models import User
+from django.db.models import Count
 
 
 def index_page(request):
@@ -13,10 +15,11 @@ def index_page(request):
 
 # /snippets/list
 # /snippets/list/?lang=python
+# /snippets/list/?user_id=2
 def snippets_page(request):
     # TODO: реализовать "сброс фильтра"
     # TODO: реализовать направление сортировку по алфавиту
-    # print(f"user = {request.user.is_authenticated}")
+    print(f"user_id = {request.GET.get('user_id')}")
     context = {
         'pagename': 'Просмотр сниппетов'
     }
@@ -29,11 +32,15 @@ def snippets_page(request):
         snippets = snippets.filter(lang=request.GET['lang'])
         context['lang'] = request.GET['lang']
 
+    if request.GET.get("user_id"):
+        snippets = snippets.filter(user__id=request.GET['user_id'])
+
     if request.GET.get("sort"):
         snippets = snippets.order_by(request.GET.get("sort"))
 
     context['snippets'] = snippets
-
+    users = User.objects.all().annotate(num_snippets=Count('snippet')).filter(num_snippets__gte=1)
+    context['users'] = users
     return render(request, 'pages/view_snippets.html', context)
 
 
