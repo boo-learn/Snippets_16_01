@@ -17,7 +17,7 @@ class Snippet(models.Model):
     private = models.BooleanField(default=False)  # False - public / True - private
     creation_date = models.DateTimeField(auto_now=True)
     user = models.ForeignKey(to=User, on_delete=models.CASCADE,
-                             blank=True, null=True)
+                             blank=True, null=True, related_name="snippets")
 
     def __str__(self):
         return f"Snippet: {self.name} lang: {self.lang} author: {self.user}"
